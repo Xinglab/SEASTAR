@@ -115,7 +115,7 @@ echo -e "
 ====================================================
 - SEASTAR [version 0.9.2]
 
-Please see the webpage on Github about SEASTAR for more details: https://github.com/zhyqin/SEASTAR.git or https://github.com/Xinglab/SEASTAR
+Please see the webpage on Github about SEASTAR for more details: https://github.com/Xinglab/SEASTAR.git
 
 ===================================================="
 
@@ -160,7 +160,7 @@ De novo mode: bash [scriptPath]/SEASTAR.sh -A [inputdata of sample_1] -B [inputd
 -S The strand specific type of input data. The 's' option represents strand-specific data. The 'U' option represents non-strand specific data. Default is '`U`'.
 
 \n====================================================
-Please see the webpage on Github about SEASTAR for more details: https://github.com/zhyqin/SEASTAR.git \n
+Please see the webpage on Github about SEASTAR for more details: https://github.com/Xinglab/SEASTAR.git \n
 "
 fi
 

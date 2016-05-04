@@ -14,14 +14,15 @@ outpath=${2}/tmp/${func}/
 inpath=${2}/tmp/tsgtf/
 mkdir $outpath
 
-if [ strand = "U" ]
-then
-  strand=;
-fi
-if [ strand != "U" ]
+if [ $strand != "U" ]
 then
   strand=-${strand};
 fi
+if [ $strand = "U" ]
+then
+  strand=;
+fi
+
 
 ############  Counting step  #################
 #Loading all replicates in Group A and B

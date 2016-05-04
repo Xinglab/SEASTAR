@@ -45,7 +45,7 @@ bash [scriptPath]test_SEASTAR.sh [BowtieIndexPath]
 Alternatively, you may run the full command on the command line:
 
 ```bash
-bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -g ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf –i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa –c 0.1 -p 4 -b U
+bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -g ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf –i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa –c 0.1 -p 1 -b U
 ```
 
 ####* De novo mode example
@@ -54,7 +54,7 @@ The parameter `-g` can be used to run SEASTAR in a De novo mode.
 
 The following line will generate bash scripts for the example data set described above:
 ```bash
-bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -g ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf –i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa –c 0.1 -p 4 -b U
+bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -g ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf –i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa –c 0.1 -p 1 -b U
 ```
 
 ####* Reference mode example
@@ -63,7 +63,7 @@ The parameter `-G` can be used to run SEASTAR in a Reference mode skipped the RA
 
 The following line will generate bash scripts for the example data set described above:
 ```bash
-bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -G ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf –i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa –c 0.1 -p 4 -b U
+bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -G ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf –i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa –c 0.1 -p 1 -b U
 ```
 
 ####* Batch mode example
@@ -72,7 +72,7 @@ The parameter `-b B` can be used to run SEASTAR in a compute cluster environment
 
 The following line will generate bash scripts for the example data set described above:
 ```bash
-bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -g ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf –i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa –c 0.1 -p 4 -b B
+bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -g ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf –i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa –c 0.1 -p 1 -b B
 ```
 
 ## Technical Overview
