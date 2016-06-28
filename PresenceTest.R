@@ -30,9 +30,9 @@ colnames(tss)[(ncol(tss)-2):ncol(tss)] <- c("e_max","j_max", "result")
 
 #### load in the pca and logit parameters
 ##pca
-tmp <- read.delim(paste(syspath,"/model/tss_nuc_4.csv",sep=''),sep="\t", header=TRUE)
-tp <- read.delim(paste(syspath,"/model/cage_0.1_tsscov.ns.cov",sep=''),sep="\t", header=FALSE)
-fp <- read.delim(paste(syspath,"/model/cage_0.1-5_tsscov.ns.cov",sep=''),sep="\t", header=FALSE)
+tmp <- read.delim(paste(syspath,"/model/H1nuc_tss_4.csv",sep=''),sep="\t", header=TRUE)
+tp <- read.delim(paste(syspath,"/model/H1nuc_POS_CAGE_RNAS.cov",sep=''),sep="\t", header=FALSE)
+fp <- read.delim(paste(syspath,"/model/H1nuc_NEG_CAGE_RNAS.cov",sep=''),sep="\t", header=FALSE)
 pca <- prcomp(tmp[,c("j_max","e_max")])
 tmp <- cbind(tmp,pca$x)
 a <- cbind(tss[,"j_max"]-pca$center["j_max"],tss[,"e_max"]-pca$center["e_max"]) %*% pca$rotation
@@ -55,7 +55,7 @@ pre=apply(cbind(predict(a,tss),rep(100,nrow(tss))),1,min)
 p=exp(pre)/(1+exp(pre))
 tss <- cbind(tss,p)
 colnames(tss)[ncol(tss)] <- "logit"
-tss$result <- tss$logit > 0.916
+tss$result <- tss$logit > 0.909
 
 ##check whether novel tss, true represent true TSS after filter, 0 represent novel (not present before assembly)
 ##first exons of each transcript
