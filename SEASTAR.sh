@@ -149,7 +149,7 @@ De novo mode: bash [scriptPath]/SEASTAR.sh -A [inputdata of sample_1] -B [inputd
 
 -p <int> The number of processors to be used. The default value is 1.
 
--d <int> The distance among the TSSs derived from the same promoter region. The default is 100 (bps).
+-d <int> The distance among the TSSs derived from the same promoter region. The default is max (bps).
 
 -c <float> The splicing difference cutoff. The cutoff is used in the null hypothesis test for differential splicing. The default is 0.1 for a 10% difference. The valid range is 0 ¡Ü cutoff < 1.
 
@@ -245,7 +245,14 @@ Rscript ${TSSfolder}FDR.R ${output_folder}
 EOF
 
 #Step6-2: To identify differential usage of tandem 5'UTR by using DaPars package
-    	bash ${TSSfolder}utr_batch.sh ${original_data} ${output_folder} ${genome_size} ${original_data_1} ${original_data_2} ${TSSfolder}
+    	mkdir ${output_folder}/tmp/RMATS_utr >/dev/null 2>&1
+    	bash ${TSSfolder}utr_batch.sh ${original_data} ${output_folder} ${genome_size} ${original_data_1} ${original_data_2} ${TSSfolder} ${Strand} ${length1} ${Splicing_diff_cutoff} ${TypeData} ${MultiProcessor}
+
+    	
+    	
+    	
+    	
+    	
    	# rm -r ${output_folder}/tmp/
 
 
@@ -306,10 +313,10 @@ EOF
     	rm -r ${output_folder}/tmp/RMATS/ >/dev/null 2>&1
     	
 #Step6-2: To identify differential usage of tandem 5'UTR by using DaPars package
-    	bash ${TSSfolder}utr.sh ${original_data} ${output_folder} ${genome_size} ${original_data_1} ${original_data_2} ${TSSfolder}
+    	mkdir ${output_folder}/tmp/RMATS_utr >/dev/null 2>&1
+    	bash ${TSSfolder}utr.sh ${original_data} ${output_folder} ${genome_size} ${original_data_1} ${original_data_2} ${TSSfolder} ${Strand} ${length1} ${Splicing_diff_cutoff} ${TypeData} ${MultiProcessor}
 
-    	
-    	
+
     	
     	
     	# rm -r ${output_folder}/tmp/

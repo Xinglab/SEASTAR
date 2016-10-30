@@ -12,7 +12,7 @@ path <- argv[1]
   ann<-ann[,1:10]
   colnames(ann)[1]<-'ID'
   input<-merge(ann,input,by='ID')
-  input<-input[order(input[,"FDR"]),]
+  input<-input[order(as.numeric(as.vector(input[,"FDR"]))),]
   write.table(input, paste(path,"/tmp/RMATS/rMATS_Result.txt",sep = ""),sep="\t", row.names=FALSE, col.name=TRUE, quote = FALSE)
   write.table(input, paste(path,"/rMATS_Result.txt",sep = ""),sep="\t", row.names=FALSE, col.name=TRUE, quote = FALSE)
 

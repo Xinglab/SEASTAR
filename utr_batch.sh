@@ -6,7 +6,7 @@ echo "To identify differential usage of tandem 5UTR by using DaPars model";
 ############  Parameters  #################
 #Reading defined parameters
 TSSfolder=$0;TSSfolder=${TSSfolder:0:${#TSSfolder}-12};
-original_data=$1;outpath=$2;genome=$3;data1=$4;data2=$5;syspath=$6;
+original_data=$1;outpath=$2;genome=$3;data1=$4;data2=$5;syspath=$6;Strand=$7;length1=$8;Splicing_diff_cutoff=$9;TypeData=${10};MultiProcessor=${11};
 
 func=utr
 codepath=${2}/code/
@@ -52,11 +52,29 @@ Fold_change_cutoff=0.288
 EOF
 
 #Detecting the tandem 5'UTR events by using DaPars model
+#Using split.R to segment the 5'UTR into two regions based on change-point model
+#Count the reads coverage in each replicate; including the exon body region, its downstream splice junction, downstream intron region and upstream intergenic region
+#The table.cov can be used for differential expression analysis of each first exon as the input of DESeq or edgeR
+#Using format.R to estimate the the coverage and effective length of each first exon in one AFE event preparing for the estimation of PSI
+#Using RMATS.sh to perform rMATS package. The null hypothesis and alternative hypothesis are proposed to detect whether the change of PSI for one first exon between the case and control groups exceeds the threshold    	
+#Using FDR.R to calculate the adjusted P-Value
+
 cat ${TSSfolder}header.txt > ${codepath}a06_${func}_test.sh
 cat>>${codepath}a06_${func}_test.sh<<EOF
 python ${syspath}dapars/DaPars_main.py ${2}/utr_configure.txt
+Rscript ${syspath}split.R ${2}/utr_result_All_Prediction_Results.txt ${2}/
+bash ${TSSfolder}cov_utr.sh ${original_data} ${outpath} ${genome} ${Strand}
+bash ${TSSfolder}table_utr.sh ${original_data} ${outpath}
+Rscript ${TSSfolder}format_utr.R ${outpath} ${length1}
+bash ${TSSfolder}RMATS_utr.sh ${outpath} ${Splicing_diff_cutoff} ${TypeData} ${MultiProcessor} ${TSSfolder}
+Rscript ${TSSfolder}FDR_utr.R ${outpath}
 
 EOF
 
-#Output: utr_result_All_Prediction_Results.txt
+
+
+
+#Output: utr_result_All_Prediction_Results.txt, utr.annotation, utr_split.bed
 #A standard output format as the DaPars documentation used for the prediction of tandem 5'UTR events
+#utr.annotation: Annotation file of utr adding with fit value and changed point predicted by Dapars prediction model
+#utr_split.bed: bed region of utr split into two regions
