@@ -203,7 +203,7 @@ The method as described in [rMATS documentation](http://rnaseq-mats.sourceforge.
 
 #### utr_result_All_Prediction_Results.txt
 
-we predicted whether the usage of a FE would be shortened or lengthened between two different biological conditions. The method as described in the [Dapars documentation](http://lilab.research.bcm.edu/dldcc-web/lilab/zheng/DaPars_Documentation/html/DaPars.html).
+We predicted whether the usage of a FE would be shortened or lengthened between two different biological conditions. The method as described in the [Dapars documentation](http://lilab.research.bcm.edu/dldcc-web/lilab/zheng/DaPars_Documentation/html/DaPars.html).
 
 - Predicted_Proximal_5UTR: predicted switched site of lengthening and shortening first exons
 - Group_A_Mean_PDUI: mean PDUI of sample group A (PDUI: Percentage of Distal start site Usage Index)
