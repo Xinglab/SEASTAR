@@ -3,7 +3,7 @@
 Zhiyi Qin, Tevfik Umut Dincer, Xuegong Zhang, Yi Xing
 
 First Edition June 20, 2015  
-Last revised May 5, 2016
+Last revised Oct 30, 2016
 
 SEASTAR (Systematic Evaluation of Alternative STArt site in RNA) is a software package for Transcription Start Site (TSS) identification and quantification using only RNA-seq data. It assembles novel TSSs based only on RNA-Seq data and merges them with known TSSs from a public database. This package enables high-quality TSS identification that is comparable to the highly sophisticated CAGE technology. This package is particularly useful for finding novel TSSs that contribute to transcriptome complexity along with identifying differential promoter utilization.
 
@@ -203,7 +203,7 @@ The method as described in [rMATS documentation](http://rnaseq-mats.sourceforge.
 
 #### utr_result_All_Prediction_Results.txt
 
-The prediction represents the quantitation of alternative usage of 5'UTR. The method as described in the [Dapars documentation](http://lilab.research.bcm.edu/dldcc-web/lilab/zheng/DaPars_Documentation/html/DaPars.html).
+we predicted whether the usage of a FE would be shortened or lengthened between two different biological conditions. The method as described in the [Dapars documentation](http://lilab.research.bcm.edu/dldcc-web/lilab/zheng/DaPars_Documentation/html/DaPars.html).
 
 - Predicted_Proximal_5UTR: predicted switched site of lengthening and shortening first exons
 - Group_A_Mean_PDUI: mean PDUI of sample group A (PDUI: Percentage of Distal start site Usage Index)
@@ -212,6 +212,22 @@ The prediction represents the quantitation of alternative usage of 5'UTR. The me
 - P_val: the probability whether the absolute difference is larger than 0
 - adjusted.P_val: adjusted p-value using Benjamini method
 - Pass_Filter: final step checked by the parameters in the user defined configure file. Y and N represent passed and filtered, respectively.
+
+#### rMATS_utr_Result.txt
+
+With the prediction model of DaPars, the switch point between the lengthening and shortening regions was predicted and reported. Then the whole region of a FE was split into two regions based its predicted switch point. The following statistical inference was performed based on rMATS by testing whether the relative usage of these two split regions would be significantly changed between two different samples.
+
+- IC_SAMPLE_1: counts of the first region of split exon for SAMPLE_1, replicates are separated by comma
+- SC_SAMPLE_1: counts of other region of split exon for SAMPLE_1, replicates are separated by comma
+- IC_SAMPLE_2: counts of the first region of split exon for SAMPLE_2, replicates are separated by comma
+- SC_SAMPLE_2: counts of other region of split exon for SAMPLE_2, replicates are separated by comma
+- IncFormLen: length of the first region of split exon we studying, used for normalization
+- SkipFormLen: length of other region of split exon, used for normalization
+- IncLevel1: usage ratio for SAMPLE_1 replicates (comma separated) calculated from normalized counts
+- IncLevel2: usage ratio for SAMPLE_2 replicates (comma separated) calculated from normalized counts
+- IncLevelDifference: $average(IncLevel1) - average(IncLevel2)$
+- PValue: the probability whether the absolute difference is larger than the user-defined cutoff
+- FDR: adjusted p-value using the Benjamini method
 
 ## Contact and Bug Reports
 Please contact Zhiyi Qin <qzy06@mails.tsinghua.edu.cn> for questions and bug reports.
