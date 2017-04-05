@@ -5,7 +5,7 @@
 ##      Authors: Zhiyi Qin, Bioinfomatics Laboratory, Department of Automation, Tsinghua University, qzy06@mails.tsinghua.edu.cn
 ##               Yi Xing, Department of Microbiology, Immunology, & Molecular Genetics, University of California, Los Angeles, yxing@ucla.edu
 ##      Created: May 5, 2014 for creation
-## Last Revised: May 5, 2016 for adding strand-specific function
+## Last Revised: Apr 05, 2017 for fixed the bug in test command and gtf file with relative path
 ###############################################
 
 
@@ -113,7 +113,7 @@ while getopts 'A:B:o:g:G:i:s:d:c:p:t:S:b:' optname
 #Showing the package version
 echo -e "
 ====================================================
-- SEASTAR [version 0.9.2]
+- SEASTAR [version 0.9.4]
 
 Please see the webpage on Github about SEASTAR for more details: https://github.com/Xinglab/SEASTAR.git
 
@@ -165,6 +165,7 @@ Please see the webpage on Github about SEASTAR for more details: https://github.
 fi
 
 
+
 #All of input data including Group A and Group B
 original_data=${original_data_1},${original_data_2}
 #Number of replicates in Group A
@@ -198,6 +199,19 @@ else
       cd ${Current_path}
 
       if [ "$ref_gtf" = "0" ];then
+            
+#Auto detection and change the relative path into absolute path for GTF
+tmp=${public_gtf%/*};
+if [ x${tmp} != "x" ]
+then
+gtffolder=($(cd ${tmp} ; pwd)/)
+else
+gtffolder=($(pwd)/)
+fi
+public_gtf=${gtffolder}${public_gtf##*/}
+cd ${Current_path}
+
+
 #Step1: Assembly of novel transcripts by Reference Annotation Based Transcript (RABT) method using Cufflinks in each sample based on RNA-seq reads and reference annotation
     	  bash ${TSSfolder}gtf_batch.sh ${original_data} ${output_folder} ${public_gtf} ${MultiProcessor} 
     	
@@ -207,6 +221,19 @@ else
 #Step2-2: Reformat the annotation of transcriptome and an interface for more FPKM analysis
     	  bash ${TSSfolder}tsgtf_batch.sh ${original_data} ${output_folder} ${output_folder}/tmp/mrg/merged_asm/merged.gtf ${MultiProcessor} 
     	else
+    	
+#Auto detection and change the relative path into absolute path for GTF
+tmp=${ref_gtf%/*};
+if [ x${tmp} != "x" ]
+then
+gtffolder=($(cd ${tmp} ; pwd)/)
+else
+gtffolder=($(pwd)/)
+fi
+ref_gtf=${gtffolder}${ref_gtf##*/}
+cd ${Current_path}
+
+
 #Step2-2: Reformat the annotation of transcriptome and an interface for more FPKM analysis
     	  bash ${TSSfolder}tsgtf_batch.sh ${original_data} ${output_folder} ${ref_gtf} ${MultiProcessor} 
     	fi
@@ -273,6 +300,19 @@ EOF
 
 #Record and show each command on the screen
       if [ "$ref_gtf" = "0" ];then
+
+#Auto detection and change the relative path into absolute path for GTF
+tmp=${public_gtf%/*};
+if [ x${tmp} != "x" ]
+then
+gtffolder=($(cd ${tmp} ; pwd)/)
+else
+gtffolder=($(pwd)/)
+fi
+public_gtf=${gtffolder}${public_gtf##*/}
+cd ${Current_path}
+
+
 #Step1: Assembly of novel transcripts by Reference Annotation Based Transcript (RABT) method using Cufflinks in each sample based on RNA-seq reads and reference annotation
     	  bash ${TSSfolder}gtf.sh ${original_data} ${output_folder} ${public_gtf} ${MultiProcessor} 
     	
@@ -282,6 +322,19 @@ EOF
 #Step2-2: Reformat the annotation of transcriptome and an interface for more FPKM analysis
     	  bash ${TSSfolder}tsgtf.sh ${original_data} ${output_folder} ${output_folder}/tmp/mrg/merged_asm/merged.gtf ${MultiProcessor} 
     	else
+
+#Auto detection and change the relative path into absolute path for GTF
+tmp=${ref_gtf%/*};
+if [ x${tmp} != "x" ]
+then
+gtffolder=($(cd ${tmp} ; pwd)/)
+else
+gtffolder=($(pwd)/)
+fi
+ref_gtf=${gtffolder}${ref_gtf##*/}
+cd ${Current_path}
+
+
 #Step2-2: Reformat the annotation of transcriptome and an interface for more FPKM analysis
     	  bash ${TSSfolder}tsgtf.sh ${original_data} ${output_folder} ${ref_gtf} ${MultiProcessor} 
       fi

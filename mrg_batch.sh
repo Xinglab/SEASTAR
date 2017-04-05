@@ -16,6 +16,7 @@ func=mrg
 inpath=${2}/tmp/gtf/
 codepath=${2}/code/
 outpath=${2}/tmp/${func}/
+Current_path=($(pwd))
 mkdir $outpath
 
 ############  Merging transcipts annotation step  #################
@@ -34,7 +35,7 @@ ${inpath}\${i}transcripts.gtf
 EOFF
 done
 
-cd ${outpath}
+cd ${outpath}   ##required by cuffmerge
 cuffmerge -p ${MultiProcessor} -g ${public_gtf} -s ${sequence} ${outpath}gtf_asm.txt -o ${outpath}
 cp ${outpath}merged_asm/merged.gtf ${2}/merged.gtf
 EOF

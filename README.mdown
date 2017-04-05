@@ -1,11 +1,12 @@
 # SEASTAR: Systematic Evaluation of Alternative STArt site in RNA
 
-Zhiyi Qin, Tevfik Umut Dincer, Xuegong Zhang, Yi Xing
+Zhiyi Qin, Xuegong Zhang, Yi Xing
 
 First Edition June 20, 2015  
-Last revised Oct 30, 2016
+Last revised Apr 05, 2017
 
 SEASTAR (Systematic Evaluation of Alternative STArt site in RNA) is a software package for Transcription Start Site (TSS) identification and quantification using only RNA-seq data. It assembles novel TSSs based only on RNA-Seq data and merges them with known TSSs from a public database. This package enables high-quality TSS identification that is comparable to the highly sophisticated CAGE technology. This package is particularly useful for finding novel TSSs that contribute to transcriptome complexity along with identifying differential promoter utilization.
+version 0.9.4
 
 ## Usage
 ```bash
@@ -45,7 +46,7 @@ bash [scriptPath]test_SEASTAR.sh [BowtieIndexPath]
 Alternatively, you may run the full command on the command line:
 
 ```bash
-bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -g ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf –i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa –c 0.1 -p 1 -b U
+bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -g ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf -i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa -c 0.1 -p 1 -b U
 ```
 
 ####* De novo mode example
@@ -54,7 +55,7 @@ The parameter `-g` can be used to run SEASTAR in a De novo mode.
 
 The following line will generate bash scripts for the example data set described above:
 ```bash
-bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -g ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf –i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa –c 0.1 -p 1 -b U
+bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -g ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf -i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa -c 0.1 -p 1 -b U
 ```
 
 ####* Reference mode example
@@ -63,7 +64,7 @@ The parameter `-G` can be used to run SEASTAR in a Reference mode skipped the RA
 
 The following line will generate bash scripts for the example data set described above:
 ```bash
-bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -G ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf –i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa –c 0.1 -p 1 -b U
+bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -G ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf -i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa -c 0.1 -p 1 -b U
 ```
 
 ####* Batch mode example
@@ -72,7 +73,7 @@ The parameter `-b B` can be used to run SEASTAR in a compute cluster environment
 
 The following line will generate bash scripts for the example data set described above:
 ```bash
-bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -g ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf –i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa –c 0.1 -p 1 -b B
+bash ./SEASTAR.sh -A ./test/adipose1.bam,./test/adipose2.bam -B ./test/adrenal1.bam,./test/adrenal2.bam -o ./testresult -g ./test/Homo_sapiens.Ensembl.GRCh37.72.chr7.gtf -i ./test/hg19.chrom.sizes -s [BowtieIndexPath]/hg19.fa -c 0.1 -p 1 -b B
 ```
 
 ## Technical Overview
@@ -231,3 +232,6 @@ With the prediction model of DaPars, the switch point between the lengthening an
 
 ## Contact and Bug Reports
 Please contact Zhiyi Qin <qzy06@mails.tsinghua.edu.cn> for questions and bug reports.
+
+## Acknowledgements
+We wish to thank Tevfik Umut Dincer, Shihao Shen, Jinkai Wang and Juw Won Park for technical assistance and comments.
