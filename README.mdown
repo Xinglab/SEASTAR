@@ -6,6 +6,7 @@ First Edition June 20, 2015
 Last revised Apr 05, 2017
 
 SEASTAR (Systematic Evaluation of Alternative STArt site in RNA) is a software package for Transcription Start Site (TSS) identification and quantification using only RNA-seq data. It assembles novel TSSs based only on RNA-Seq data and merges them with known TSSs from a public database. This package enables high-quality TSS identification that is comparable to the highly sophisticated CAGE technology. This package is particularly useful for finding novel TSSs that contribute to transcriptome complexity along with identifying differential promoter utilization.
+
 version 0.9.4
 
 ## Usage
