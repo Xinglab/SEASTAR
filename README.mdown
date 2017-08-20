@@ -247,7 +247,7 @@ Additionally, when running SEASTAR on OS X systems, we have the following sugges
 
 
 ## Contact and Bug Reports
-Please contact Zhiyi Qin <qzy06@mails.tsinghua.edu.cn> for questions and bug reports.
+Please contact Zhiyi Qin <qzyfy.dq@gmail.com> for questions and bug reports.
 
 ## Acknowledgements
 We wish to thank Tevfik Umut Dincer, Shihao Shen, Jinkai Wang and Juw Won Park for technical assistance and comments.
