@@ -21,8 +21,9 @@ SEASTAR requires the following packages on your Linux environment to run:
 - samtools >= 0.1.19 (http://sourceforge.net/projects/samtools/files/samtools/0.1.19/)
 - bedtools >= 2.15.0 (http://bedtools.readthedocs.org/en/latest/content/installation.html)
 - R >= 3.0.2 (https://www.r-project.org/)
-- Python 2.6.x or Python 2.7.x and the corresponding versions of NumPy, SciPy and rpy2
+- Python 2.6.x or Python 2.7.x and the corresponding versions of NumPy and SciPy
 	- Alternatively, install Anaconda for PYTHON 2.7, which bundles NumPy and SciPy packages to the Python installation (https://www.continuum.io/downloads).
+- rpy2 >= 2.5.0 (https://pypi.python.org/pypi/rpy2/)
 
 Add the Cufflinks, samtools, bedtools, R and Python directories to the `$PATH` environment variable, in the given order.
 
