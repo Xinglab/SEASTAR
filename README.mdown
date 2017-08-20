@@ -238,6 +238,7 @@ With the prediction model of DaPars, the switch point between the lengthening an
 
 ## Q&A
 1. What version of OS X system can use this pipeline?
+
 We suggest to use a OS X system => 10.7.
 Additionally, when running SEASTAR on OS X systems, we have the following suggestions for users: 
 - 1) Use the version Cufflinks 2.1.0 (or lower version) for Mac (http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.1.0.OSX_x86_64.tar.gz). Its higher version does not work on Mac OS X sometimes. This bug has been reported several times on some Cufflinks user forums. 
