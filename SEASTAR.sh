@@ -174,50 +174,6 @@ length1=${#list1[@]}
 ##########################################################
 
 
-################  bedtools version detection  ################
-## bedtools has a important change of coverageBed as version 2.24.0
-vercomp () {
-    if [[ $1 == $2 ]]
-    then
-        return 0
-    fi
-    local IFS=.
-    local i ver1=($1) ver2=($2)
-    # fill empty fields in ver1 with zeros
-    for ((i=${#ver1[@]}; i<${#ver2[@]}; i++))
-    do
-        ver1[i]=0
-    done
-    for ((i=0; i<${#ver1[@]}; i++))
-    do
-        if [[ -z ${ver2[i]} ]]
-        then
-            # fill empty fields in ver2 with zeros
-            ver2[i]=0
-        fi
-        if ((10#${ver1[i]}>10#${ver2[i]}))
-        then
-            return 1
-        fi
-        if ((10#${ver1[i]}<10#${ver2[i]}))
-        then
-            return 2
-        fi
-    done
-    return 0
-}
-bedver=($(bedtools -version |tr -d "bedtools v"))
-    vercomp $bedver 2.24.0
-    case $? in
-        0) bedA='-b'
-        bedB='-a';; # "="
-        1) bedA='-b'
-        bedB='-a';; # ">"
-        2) bedA='-a'
-        bedB='-b';; # "<"
-    esac
-
-
 ################  Running the pipeline  ################
 #Error without input data
 if [ ${original_data_1} = "0" ];then
@@ -287,9 +243,9 @@ cd ${Current_path}
     	cat ${TSSfolder}header.txt > ${output_folder}/code/a03_Nrtss.sh
     	cat>>${output_folder}/code/a03_Nrtss.sh<<EOF
 Rscript ${TSSfolder}FirstExon.R ${output_folder}/tmp/tsgtf
-coverageBed -s ${bedA} ${output_folder}/tmp/tsgtf/nontss.bed ${bedB} ${output_folder}/tmp/tsgtf/ant.bed | tr -d "\r" > ${output_folder}/tmp/tsgtf/cmb
+coverageBed -s -a ${output_folder}/tmp/tsgtf/nontss.bed -b ${output_folder}/tmp/tsgtf/ant.bed | tr -d "\r" > ${output_folder}/tmp/tsgtf/cmb
 Rscript ${TSSfolder}TssMerge.R ${output_folder}/tmp/tsgtf ${distance}
-coverageBed -s ${bedA} ${output_folder}/tmp/tsgtf/tssant.bed ${bedB} ${output_folder}/tmp/tsgtf/tssant.bed | tr -d "\r" > ${output_folder}/tmp/tsgtf/tssant.cov
+coverageBed -s -a ${output_folder}/tmp/tsgtf/tssant.bed -b ${output_folder}/tmp/tsgtf/tssant.bed | tr -d "\r" > ${output_folder}/tmp/tsgtf/tssant.cov
 Rscript ${TSSfolder}Nrtss.R ${output_folder}/tmp/tsgtf
 EOF
 
@@ -385,9 +341,9 @@ cd ${Current_path}
     	
 #Step3: If the first exons are overlapped with each other, we merge these first exons together, so called non-redundant first exon
       Rscript ${TSSfolder}FirstExon.R ${output_folder}/tmp/tsgtf
-    	coverageBed -s ${bedA} ${output_folder}/tmp/tsgtf/nontss.bed ${bedB} ${output_folder}/tmp/tsgtf/ant.bed | tr -d "\r" > ${output_folder}/tmp/tsgtf/cmb
+    	coverageBed -s -a ${output_folder}/tmp/tsgtf/nontss.bed -b ${output_folder}/tmp/tsgtf/ant.bed | tr -d "\r" > ${output_folder}/tmp/tsgtf/cmb
     	Rscript ${TSSfolder}TssMerge.R ${output_folder}/tmp/tsgtf ${distance}
-    	coverageBed -s ${bedA} ${output_folder}/tmp/tsgtf/tssant.bed ${bedB} ${output_folder}/tmp/tsgtf/tssant.bed | tr -d "\r" > ${output_folder}/tmp/tsgtf/tssant.cov
+    	coverageBed -s -a ${output_folder}/tmp/tsgtf/tssant.bed -b ${output_folder}/tmp/tsgtf/tssant.bed | tr -d "\r" > ${output_folder}/tmp/tsgtf/tssant.cov
     	Rscript ${TSSfolder}Nrtss.R ${output_folder}/tmp/tsgtf
     	
 #Step4: Count the reads coverage in each replicate; including the exon body region, its downstream splice junction, downstream intron region and upstream intergenic region

@@ -26,7 +26,7 @@ cat>>${codepath}a02_${func}.sh<<EOF
 
 cufflinks -N -p ${MultiProcessor} -G ${public_gtf} -o ${outpath} ${outpath}tmp.bam
 
-cut -d" " -f1-6 ${outpath}transcripts.gtf | tr ' ' '\t' | tr -d ';' |tr -d '"'| cut -f1,3,4,5,7,10,12,14 > ${outpath}transcripts_cut8.gtf
+cut -d" " -f1-6 ${outpath}transcripts.gtf | sed 's/ /\t/g' |sed 's/;//g' |sed 's/"//g'| cut -f1,3,4,5,7,10,12,14 > ${outpath}transcripts_cut8.gtf
 EOF
 
 #Output: GTF format; Exons of transcripts annotation in each row
