@@ -12,6 +12,8 @@ func=cov
 codepath=${2}/code/
 outpath=${2}/tmp/${func}/
 inpath=${2}/tmp/tsgtf/
+#Current_path record
+Current_path=($(pwd))
 mkdir $outpath
 
 if [ $strand != "U" ]
@@ -76,6 +78,20 @@ j=1
 for i in ${list[*]}
 do
 mkdir ${outpath}${j}/
+
+
+#Auto detection and change the relative path into absolute path for GTF
+tmp=${i%/*};
+if [ x${tmp} != "x" ]
+then
+gtffolder=($(cd ${tmp} ; pwd)/)
+else
+gtffolder=($(pwd)/)
+fi
+i=${gtffolder}${i##*/}
+cd ${Current_path}
+
+
 cat ${TSSfolder}header.txt > ${codepath}a04_${func}_${j}.sh
 cat>>${codepath}a04_${func}_${j}.sh<<EOF
 coverageBed ${strand} ${bedA} ${i} ${bedB} ${inpath}tsscov.bed -split | tr -d "\r" > ${outpath}${j}/tsscov.cov

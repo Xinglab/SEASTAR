@@ -14,8 +14,7 @@ func=cov_utr
 codepath=${2}/code/
 outpath=${2}/tmp/${func}/
 inpath=${2}/
-mkdir $outpath
-
+mkdir ${outpath}
 if [ $strand != "U" ]
 then
   strand=-${strand};

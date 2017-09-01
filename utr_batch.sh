@@ -11,6 +11,9 @@ original_data=$1;outpath=$2;genome=$3;data1=$4;data2=$5;syspath=$6;Strand=$7;len
 func=utr
 codepath=${2}/code/
 inpath=${2}/tmp/cov/
+#Current_path record
+Current_path=($(pwd))
+mkdir $outpath
 
 ############  DaPars running step  #################
 #Generating the configure file required parameters in DaPars
@@ -33,6 +36,26 @@ count2=$[ $count2 + 1 ]
 j=$[ $j + 1 ]
 done
 group2=${group2%,*}
+
+
+##Auto detection and change the relative path into absolute path for GTF
+list=($(echo ${original_data} | tr "," "\n"))
+for i in ${list[*]}
+do
+tmp=${i%/*};
+if [ x${tmp} != "x" ]
+then
+gtffolder=($(cd ${tmp} ; pwd)/)
+else
+gtffolder=($(pwd)/)
+fi
+i=${gtffolder}${i##*/}
+cd ${Current_path}
+
+group3=${group3}${i},
+done
+original_data=${group3%,*}
+
 
 #Generating the configure file required by DaPars model
 cat>${2}/utr_configure.txt<<EOF
