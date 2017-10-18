@@ -3,11 +3,11 @@
 Zhiyi Qin, Xuegong Zhang, Yi Xing
 
 First Edition June 20, 2015  
-Last revised Aug 20, 2017
+Last revised Oct 18, 2017
 
 SEASTAR (Systematic Evaluation of Alternative STArt site in RNA) is a software package for Transcription Start Site (TSS) identification and quantification using only RNA-seq data. It assembles novel TSSs based only on RNA-Seq data and merges them with known TSSs from a public database. This package enables high-quality TSS identification that is comparable to the highly sophisticated CAGE technology. This package is particularly useful for finding novel TSSs that contribute to transcriptome complexity along with identifying differential promoter utilization.
 
-version 0.9.4 ( 1)fixed the bug in test command and gtf file with relative path; 2) fix the bug within OS system)
+version 1.0.0 - updates several descriptions and tests. To achieve v0.9.4, one can visit https://github.com/zhyqin/SEASTAR-0.9.4 for download.
 
 ## Usage
 ```bash
@@ -244,6 +244,9 @@ Additionally, when running SEASTAR on OS X systems, we have the following sugges
 - 1) Use the version Cufflinks 2.1.0 (or lower version) for Mac (http://cole-trapnell-lab.github.io/cufflinks/assets/downloads/cufflinks-2.1.0.OSX_x86_64.tar.gz). Its higher version does not work on Mac OS X sometimes. This bug has been reported several times on some Cufflinks user forums. 
 - 2) Use the lower version of samtools such as 0.1.9. Otherwise Cufflinks may not link with it and may not work. 
 - 3) Use the higher version of bedtools such as 2.26 as there are several major updates in its recent version.
+
+2. How to download v0.9.4?
+To achieve v0.9.4, one can visit https://github.com/zhyqin/SEASTAR-0.9.4 for download.
 
 
 ## Contact and Bug Reports
