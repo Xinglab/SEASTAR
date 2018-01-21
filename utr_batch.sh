@@ -19,6 +19,7 @@ mkdir $outpath
 #Generating the configure file required parameters in DaPars
 count1=0
 j=1
+group1=x
 list=($(echo ${data1} | tr "," "\n"))
 for i in ${list[*]}
 do
@@ -27,7 +28,9 @@ count1=$[ $count1 + 1 ]
 j=$[ $j + 1 ]
 done
 group1=${group1%,*}
+group1=${group1#*x}
 count2=0
+group2=x
 list=($(echo ${data2} | tr "," "\n"))
 for i in ${list[*]}
 do
@@ -36,6 +39,7 @@ count2=$[ $count2 + 1 ]
 j=$[ $j + 1 ]
 done
 group2=${group2%,*}
+group2=${group2#*x}
 
 
 ##Auto detection and change the relative path into absolute path for GTF
